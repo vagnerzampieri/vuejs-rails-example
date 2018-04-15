@@ -7,6 +7,6 @@ Demo app using Rails + Vue.js in no SPA application
 ```
 
 ```ruby
-  rails s
+  foreman start
 ```
 Navegate to `/blogs`
