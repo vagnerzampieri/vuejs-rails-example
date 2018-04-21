@@ -1,20 +1,30 @@
-/* eslint no-console:0 */
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
-//
-// To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
-// layout file, like app/views/layouts/application.html.erb
+<template>
+  <form @submit.prevent="submit">
+    <label for="title">Title</label>
+    <input v-model="blog.title" id="title">
 
-import Vue from 'vue/dist/vue.esm';
+    <div class="error" v-if="blog.title.length <= 5">
+      The title needs to be at least 5 characters.
+    </div>
+
+    <label for="blog-body">Body</label>
+    <input id="blog-body" v-model="blog.body">
+
+    <div class="error" v-if="blog.body.length <= 10">
+      The body needs to be at least 10 characters.
+    </div>
+
+    <input type="submit" value="Create blog" :disabled="!valid">
+  </form>
+</template>
+
+<script>
 
 const el = document.getElementById('blog-form-vue');
 const blog = JSON.parse(el.dataset.blog);
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-const app = new Vue({
-  el,
+export default {
   data() {
     return {
       blog,
@@ -60,5 +70,5 @@ const app = new Vue({
       });
     }
   }
-
-})
+}
+</script>
